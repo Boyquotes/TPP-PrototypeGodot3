@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://player/Controls.gd" type="Script" id=1]
+
+[node name="Controls" type="Node" groups=["controls"]]
+script = ExtResource( 1 )
