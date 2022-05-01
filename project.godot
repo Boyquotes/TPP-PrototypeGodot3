@@ -53,7 +53,7 @@ _global_script_class_icons={
 config/name="Tps Prototype"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://Prototype Icon.png"
+config/icon="res://PrototypeLevel/Prototype Icon.png"
 
 [autoload]
 
