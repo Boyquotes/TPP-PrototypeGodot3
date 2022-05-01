@@ -6,6 +6,9 @@ export(float) var min_pitch: float = -90
 export(float) var max_pitch: float = 75
 export(float) var zoom_step: float = .05
 export(float) var sensitivity: float = 0.1
+export(float) var controller_sensitivity: float = 5
+
+onready var _mobile_controls = $MobileControls
 
 var _move_vec: Vector2 = Vector2.ZERO
 var _cam_rot: Vector2 = Vector2.ZERO
@@ -40,6 +43,8 @@ func _process(delta):
 	
 	_is_jumping = Input.is_action_just_pressed("jump")
 	#_is_sprinting = Input.is_action_pressed("sprint")
+	apply_controller_rotation()
+	
 
 func _input(event):
 	# on non-touchscreen devices toggle the mouse cursor's capture mode when the ui_cancel action is
@@ -56,7 +61,7 @@ func _input(event):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	# if the mouse curosr is being captured, update the camera rotation using the relative movement
-	# and the sensitivity we defined earlier. also clamp the vevrtical camera rotation to the pitch
+	# and the sensitivity we defined earlier. also clamp the vertical camera rotation to the pitch
 	# defined range from earlier so it doesn't end up looking at weird angles
 	if _is_capturing && event is InputEventMouseMotion:
 		_cam_rot.x -= event.relative.x * sensitivity
@@ -69,6 +74,20 @@ func _input(event):
 			_zoom_scale = clamp(_zoom_scale - zoom_step, 0, 1)
 		if Input.is_action_just_pressed("zoom_out"):
 			_zoom_scale = clamp(_zoom_scale + zoom_step, 0, 1)
+
+# controller camera rotation
+func apply_controller_rotation():
+	# get axis vector by Vector2 from the joystick's x & y strength
+	var axis_vector = Vector2.ZERO
+	axis_vector.x = Input.get_action_strength("look_right") - Input.get_action_strength("look_left")
+	axis_vector.y = Input.get_action_strength("look_up") - Input.get_action_strength("look_down")
+	
+	# if controller joystick movement is detected
+	if InputEventJoypadMotion:
+		# rotate camera - might need optimisation by making a separate function
+		_cam_rot.x -= axis_vector.x * controller_sensitivity
+		_cam_rot.y -= axis_vector.y * controller_sensitivity
+		_cam_rot.y = clamp(_cam_rot.y, min_pitch, max_pitch)
 
 func get_movement_vector():
 	return _move_vec

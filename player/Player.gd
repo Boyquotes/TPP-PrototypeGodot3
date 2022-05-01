@@ -86,7 +86,7 @@ func _physics_process(delta):
 		_skin.rotation.y = _rotation
 	
 	# set the Y component of the velocity to the vertical velocity determind by the code above
-	# and update it using move_and_slide with the max slope angle we define earlier
+	# and update it using move_and_slide_with_snap with the max slope angle we define earlier and to prevent player from sliding
 	_velocity.y = _y_velocity
 	_velocity = move_and_slide_with_snap(_velocity, snap_vector, Vector3.UP, true, 4, deg2rad(max_slope_angle), true)
 	#_velocity = move_and_slide(_velocity, Vector3.UP, false, 4, deg2rad(max_slope_angle))
