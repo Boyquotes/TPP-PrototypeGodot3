@@ -6,7 +6,7 @@ export(float) var min_pitch: float = -90
 export(float) var max_pitch: float = 75
 export(float) var zoom_step: float = .05
 export(float) var sensitivity: float = 0.1
-export(float) var controller_sensitivity: float = 5
+export(float) var controller_sensitivity: float = 2.5
 
 onready var _mobile_controls = $MobileControls
 
