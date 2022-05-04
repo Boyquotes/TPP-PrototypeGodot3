@@ -1,5 +1,5 @@
-Base Prototype of the Third Person Control
+Base Prototype of the Third Person Controller
 
-Features including basic movement and jumping
+Features including basic movement and jumping.
 
-*Needs to be optimised before being pulled to the Main branch
+Compatible with Keyboard & Mouse and Controller
