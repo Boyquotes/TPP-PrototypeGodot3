@@ -1,5 +1,7 @@
 extends KinematicBody
 
+class_name Player
+
 export(float) var move_speed: float = 10
 # add sprint speed here
 export(float) var turn_speed: float = 10
