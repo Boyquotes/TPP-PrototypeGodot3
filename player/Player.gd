@@ -2,6 +2,10 @@ extends KinematicBody
 
 class_name Player
 
+signal movement_state_changed(new_state)
+
+export(float) var max_slope_angle: float = 50
+
 export(float) var move_speed: float = 10
 export(float) var sprint_speed: float = 10
 export(float) var turn_speed: float = 10
@@ -11,7 +15,7 @@ export(float) var air_acceleration: float = 25
 export(float) var normal_acceleration: float = 50
 export(float) var gravity: float = .98
 export(float) var max_terminal_velocity: float = 50
-export(float) var max_slope_angle: float = 50
+
 export(int) var max_jumps: int = 1
 export(float) var jump_cooldown: float = .1
 export(float) var cam_follow_speed: float = 8
