@@ -1,13 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://player/Controls.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
 [ext_resource path="res://player/ControllableCamera.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scripts/StateMachine.gd" type="Script" id=4]
-[ext_resource path="res://player/states/Crouching.gd" type="Script" id=5]
-[ext_resource path="res://player/Stopped.gd" type="Script" id=6]
-[ext_resource path="res://player/Moving.gd" type="Script" id=7]
-[ext_resource path="res://player/OnGround.gd" type="Script" id=8]
+[ext_resource path="res://player/states/Stopped.gd" type="Script" id=5]
+[ext_resource path="res://player/Jumping.gd" type="Script" id=6]
+[ext_resource path="res://player/Running.gd" type="Script" id=7]
 
 [sub_resource type="CapsuleMesh" id=1]
 radius = 0.5
@@ -49,48 +47,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 [node name="Controls" parent="." instance=ExtResource( 1 )]
 
 [node name="Movement" type="Node" parent="."]
-script = ExtResource( 4 )
 
-[node name="Crouching" type="Node" parent="Movement"]
+[node name="Stopped" type="Node" parent="Movement"]
 script = ExtResource( 5 )
 
-[node name="Stopped" type="Node" parent="Movement/Crouching"]
-script = ExtResource( 6 )
-
-[node name="Moving" type="Node" parent="Movement/Crouching"]
+[node name="Running" type="Node" parent="Movement"]
 script = ExtResource( 7 )
 
-[node name="OnGround" type="Node" parent="Movement"]
-script = ExtResource( 8 )
-
-[node name="Stopped" type="Node" parent="Movement/OnGround"]
-
-[node name="Running" type="Node" parent="Movement/OnGround"]
-
-[node name="Dashing" type="Node" parent="Movement/OnGround"]
-
-[node name="OnGround2" type="Node" parent="Movement"]
-
-[node name="Stopped" type="Node" parent="Movement/OnGround2"]
-
-[node name="Running" type="Node" parent="Movement/OnGround2"]
-
-[node name="Dashing" type="Node" parent="Movement/OnGround2"]
-
-[node name="InAir" type="Node" parent="Movement"]
-
-[node name="Falling" type="Node" parent="Movement/InAir"]
-
-[node name="Jumping" type="Node" parent="Movement/InAir"]
-
-[node name="Dashing" type="Node" parent="Movement/InAir"]
-
-[node name="Swimming" type="Node" parent="Movement"]
-
-[node name="Diving" type="Node" parent="Movement/Swimming"]
-
-[node name="OnSurface" type="Node" parent="Movement/Swimming"]
-
-[node name="Underwater" type="Node" parent="Movement/Swimming"]
-
-[node name="Surging" type="Node" parent="Movement/Swimming"]
+[node name="Jumping" type="Node" parent="Movement"]
+script = ExtResource( 6 )
