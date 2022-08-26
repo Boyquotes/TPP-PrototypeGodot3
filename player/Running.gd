@@ -29,4 +29,4 @@ func _physics_process(delta):
 		state_machine.transition_to("Jumping")
 
 	if move_dir != Vector2.ZERO:
-		player.skin.rotation.y = lerp_angle(player.skin.rotation.y, atan2(-direction.x, -direction.z), turn_speed * delta)
+		player._skin.rotation.y = lerp_angle(player._skin.rotation.y, atan2(-direction.x, -direction.z), turn_speed * delta)

@@ -14,7 +14,7 @@ func enter():
 	_is_jumping = true
 
 func _process(delta):
-	_is_jumping = player.controls.is_jumping()
+	_is_jumping = player._controls.is_jumping()
 
 func _physics_process(delta):
 	if !_is_jumping && player.is_on_floor():

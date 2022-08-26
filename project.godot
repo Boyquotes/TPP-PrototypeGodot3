@@ -53,6 +53,11 @@ _global_script_classes=[ {
 "class": "State",
 "language": "GDScript",
 "path": "res://scripts/State.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://scripts/StateMachine.gd"
 } ]
 _global_script_class_icons={
 "ContributorClass": "",
@@ -63,12 +68,14 @@ _global_script_class_icons={
 "Player": "",
 "PlayerState": "",
 "RepositoryItem": "",
-"State": ""
+"State": "",
+"StateMachine": ""
 }
 
 [application]
 
 config/name="Tps Prototype"
+run/main_scene="res://PrototypeLevel/PrototypeMainLevel.tscn"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://PrototypeLevel/Prototype Icon.png"
