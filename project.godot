@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://player/Player.gd"
 }, {
-"base": "Node",
+"base": "State",
 "class": "PlayerState",
 "language": "GDScript",
 "path": "res://player/states/PlayerState.gd"
@@ -52,12 +52,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://State.gd"
+"path": "res://scripts/State.gd"
 }, {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://StateMachine.gd"
+"path": "res://scripts/StateMachine.gd"
 } ]
 _global_script_class_icons={
 "ContributorClass": "",
@@ -75,7 +75,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Tps Prototype"
-run/main_scene="res://PrototypeMainLevel.tscn"
+run/main_scene="res://PrototypeLevel/PrototypeMainLevel.tscn"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://PrototypeLevel/Prototype Icon.png"

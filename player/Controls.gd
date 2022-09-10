@@ -8,7 +8,7 @@ export(float) var zoom_step: float = .05
 export(float) var sensitivity: float = 0.1
 export(float) var controller_sensitivity: float = 2.5
 
-onready var _mobile_controls = $MobileControls
+# onready var _mobile_controls = $MobileControls
 
 var _move_vec: Vector2 = Vector2.ZERO
 var _cam_rot: Vector2 = Vector2.ZERO
@@ -103,3 +103,6 @@ func get_zoom_scale():
 
 #func is_sprinting():
 #	return _is_sprinting
+
+#func is_crouching():
+	#return _is_crouching
