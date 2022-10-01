@@ -8,7 +8,7 @@ func _process(delta):
 	# this is an optional node that might be useful in some cases, but feel free to just remove it
 	var player_pos: Vector3 = _player.global_transform.origin
 	_label.text = "Player Position: (%.2f, %.2f, %.2f)\n" % [player_pos.x, player_pos.y, player_pos.z]
-	_label.text += "Move Direction: (%.2f, %.2f)\n" % [_player._move_dir.x, _player._move_dir.y]
+	#_label.text += "Move Direction: (%.2f, %.2f)\n" % [_player._move_dir.x, _player._move_dir.y]
 	_label.text += "Is Jumping: %s\n" % [_player._is_jumping]
 	_label.text += "Player Velocity: (%.2f, %.2f, %.2f)\n" % [_player._velocity.x, _player._y_velocity, _player._velocity.z]
 	_label.text += "Player Rotation: %.2f\n" % [rad2deg(_player._rotation)]
