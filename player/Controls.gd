@@ -8,14 +8,16 @@ export(float) var zoom_step: float = .05
 export(float) var sensitivity: float = 0.1
 export(float) var controller_sensitivity: float = 2.5
 
-onready var _mobile_controls = $MobileControls
+# onready var _mobile_controls = $MobileControls
 
 var _move_vec: Vector2 = Vector2.ZERO
 var _cam_rot: Vector2 = Vector2.ZERO
 var _zoom_scale: float = 0
 var _is_jumping: bool = false
 var _is_capturing: bool = false
-#var _is_sprinting: bool = false
+var _is_sprinting: bool = false
+#var _is_crouching: bool = false
+var _is_dashing: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -41,8 +43,10 @@ func _process(delta):
 		# move faster when moving diagonally
 		_move_vec = Vector2(dx, -dy).normalized()
 	
-	_is_jumping = Input.is_action_just_pressed("jump")
-	#_is_sprinting = Input.is_action_pressed("sprint")
+	_is_jumping = Input.is_action_pressed("jump")
+	_is_sprinting = Input.is_action_pressed("sprint")
+	_is_dashing = Input.is_action_pressed("dash")
+	#_is_crouching = Input.is_action_pressed("crouch")
 	apply_controller_rotation()
 	
 
@@ -101,8 +105,11 @@ func get_camera_rotation():
 func get_zoom_scale():
 	return _zoom_scale
 
-#func is_sprinting():
-#	return _is_sprinting
+func is_sprinting():
+	return _is_sprinting
 
 #func is_crouching():
 	#return _is_crouching
+
+func is_dashing():
+	return _is_dashing

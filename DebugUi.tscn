@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://FPS Counter.gd" type="Script" id=1]
+
+[node name="DebugUi" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="FPS Counter" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+script = ExtResource( 1 )

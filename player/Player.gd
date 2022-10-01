@@ -16,7 +16,7 @@ var _real_velocity: Vector3 = Vector3.ZERO
 
 func _physics_process(delta):
 	_real_velocity = Vector3(_velocity.x, _y_velocity, _velocity.z )
-	_real_velocity = move_and_slide_with_snap(_velocity, snap_vector, Vector3.UP, true, 4, deg2rad(max_slope_angle), true)
+	_real_velocity = move_and_slide_with_snap(_real_velocity, snap_vector, Vector3.UP, true, 4, deg2rad(max_slope_angle), true)
 
 func has_movement():
 	return _controls.get_movement_vector() != Vector2.ZERO || !_velocity.is_equal_approx(Vector3.ZERO)

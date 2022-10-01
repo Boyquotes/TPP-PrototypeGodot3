@@ -10,7 +10,7 @@ export(float) var max_distance: float = 10
 onready var _gimbal_h: Spatial = $GimbalH
 onready var _gimbal_v: Spatial = $GimbalH/GimbalV
 onready var _camera: ClippedCamera = $GimbalH/GimbalV/ClippedCamera
-onready var _controls: Controls = get_tree().get_nodes_in_group("controls")[0]
+onready var _controls: Controls = get_tree().get_nodes_in_group("controls")[1]
 
 var _rot_h: float = 0
 var _rot_v: float = 0
