@@ -26,7 +26,7 @@ func _physics_process(delta):
 	_jump_cooldown_remaining -= delta
 	player._y_velocity = clamp(player._y_velocity - gravity, -max_terminal_velocity, max_terminal_velocity)
 	
-	if _is_jumping && _jump_count < max_jumps && _jump_cooldown_remaining <= 0:
+	if _is_jumping && player.is_on_floor() && _jump_count < max_jumps && _jump_cooldown_remaining <= 0:
 		_is_jumping = false
 		player._y_velocity = jump_force
 		_jump_count += 1

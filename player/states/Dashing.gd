@@ -15,4 +15,7 @@ func physics_process(delta):
 		return
 	
 	_will_dash = false
-	#commit first before writing more code in
+	var move_dir = player._controls.get_movement_vector()
+	var direction = Vector3.FORWARD.rotated(Vector3.UP, player._skin.rotation.y)
+	player._velocity = player.move_and_slide_with_snap(direction * dash_power, player.snap_vector, Vector3.FORWARD, true, 4, deg2rad(player.max_slope_angle), true)
+	state_machine.transition_to("OnGround")
