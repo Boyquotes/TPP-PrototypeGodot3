@@ -6,8 +6,8 @@ Features include:
 - Jumping
 - Rotating Camera
 - Zooming in and out
-- *Sprinting*
-- *Scramble/Dash*
+- Sprinting
+- Scramble/Dash
 - *Crouching*
 
 **Features in italics are being developed**
