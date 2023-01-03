@@ -7,12 +7,12 @@ export(float) var max_slope_angle: float = 50
 onready var skin: Spatial = $Skin
 onready var camera: ControllableCamera = $CamRoot/ControllableCamera
 onready var controls: Controls = $Controls
-onready var chime = $Player/DetectSound
 
 var velocity: Vector3 = Vector3.ZERO
 var y_velocity: float = 0
 
 var _real_velocity: Vector3 = Vector3.ZERO
+var interactables: Array
 
 func _physics_process(delta):
 	# the real velocity is a combination of the horizontal and vertical velocities as determined by
@@ -24,4 +24,3 @@ func has_movement():
 	# the player is fully stopped only if both the movement vector and the velocity
 	# vectors are approximately zero. otherwise it means they have movement
 	return controls.get_movement_vector() != Vector2.ZERO || !velocity.is_equal_approx(Vector3.ZERO)
-

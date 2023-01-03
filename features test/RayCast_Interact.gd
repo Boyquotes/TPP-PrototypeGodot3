@@ -1,14 +1,10 @@
 extends RayCast
 
 onready var prompt = $Prompt
-onready var chime = $DetectSound
 
-func _ready():
-	add_exception(Player)
+#func _ready():
+	#add_exception(owner)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if self.is_colliding():
-		#chime.play()
-		var collider = self.get_collider()
-		prompt.text = "Interact using "
-		print("detected")
+		prompt.text("Detected")

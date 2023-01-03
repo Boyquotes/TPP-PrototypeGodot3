@@ -1,8 +1,9 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://AreaTrigger.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GameObjects/AreaTrigger.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Interactable.tscn" type="PackedScene" id=3]
+[ext_resource path="res://PlayerInteractArea.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ProceduralSky" id=1]
 
@@ -15,8 +16,6 @@ size = Vector2( 200, 200 )
 
 [sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0, 0.490196, 0.0196078, 1 )
-
-[sub_resource type="CubeMesh" id=8]
 
 [node name="Main" type="Spatial"]
 
@@ -58,21 +57,35 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 16 )
 polygon = PoolVector2Array( 0, 0, 0, 2, 3, 0 )
 depth = 4.0
 
-[node name="MeshInstance" type="MeshInstance" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2466, 1.22446, -12.7183 )
-mesh = SubResource( 8 )
-
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.24706, 0, 4.67049 )
 
 [node name="AreaTrigger" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -12.6 )
-node_path = NodePath("../Interactable")
+node_path = NodePath("Interactable")
 enter_method = "play_sound_when_enter"
 exit_method = "play_sound_when_out"
 
-[node name="Interactable" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -12.6 )
+[node name="Interactable" parent="AreaTrigger" instance=ExtResource( 3 )]
+
+[node name="AreaTrigger2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -12.6 )
+node_path = NodePath("Interactable")
+enter_method = "play_animation_when_enter"
+exit_method = "reset_animation_when_out"
+
+[node name="Interactable" parent="AreaTrigger2" instance=ExtResource( 3 )]
+
+[node name="PlayerInteractArea" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2, -12.6 )
+node_path = NodePath("Interactable")
+call_method = "play_animation_when_enter"
+
+[node name="Interactable" parent="PlayerInteractArea" instance=ExtResource( 3 )]
 
 [connection signal="body_entered" from="AreaTrigger" to="AreaTrigger" method="_on_AreaTrigger_body_entered"]
 [connection signal="body_exited" from="AreaTrigger" to="AreaTrigger" method="_on_AreaTrigger_body_exited"]
+[connection signal="body_entered" from="AreaTrigger2" to="AreaTrigger2" method="_on_AreaTrigger_body_entered"]
+[connection signal="body_exited" from="AreaTrigger2" to="AreaTrigger2" method="_on_AreaTrigger_body_exited"]
+[connection signal="body_entered" from="PlayerInteractArea" to="PlayerInteractArea" method="_on_PlayerInteractArea_body_entered"]
+[connection signal="body_exited" from="PlayerInteractArea" to="PlayerInteractArea" method="_on_PlayerInteractArea_body_exited"]

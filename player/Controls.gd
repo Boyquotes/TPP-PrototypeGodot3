@@ -6,9 +6,9 @@ export(float) var min_pitch: float = -90
 export(float) var max_pitch: float = 75
 export(float) var zoom_step: float = .05
 export(float) var sensitivity: float = 0.1
-export(float) var controller_sensitivity: float = 2.5
+export(float) var controller_sensitivity: float = 0.1
 
-onready var _mobile_controls = $MobileControls
+#onready var _mobile_controls = $MobileControls
 
 var _move_vec: Vector2 = Vector2.ZERO
 var _cam_rot: Vector2 = Vector2.ZERO
@@ -18,6 +18,8 @@ var _is_sprinting: bool = false
 var _is_dashing: bool = false
 var _is_crouching: bool = false
 var _is_capturing: bool = false
+var _is_interacting: bool = false
+var _is_cancelling: bool = false
 #var _is_touchscreen: bool = false
 
 func _ready():
@@ -47,6 +49,8 @@ func _process(delta):
 	_is_sprinting = Input.is_action_pressed("sprint")
 	_is_dashing = Input.is_action_pressed("dash")
 	_is_crouching = Input.is_action_pressed("crouch")
+	_is_interacting = Input.is_action_pressed("go_interact")
+	_is_cancelling = Input.is_action_pressed("cancel_interact")
 	apply_controller_rotation()
 
 func _input(event):
@@ -112,9 +116,14 @@ func is_crouching():
 func get_camera_rotation():
 	return _cam_rot
 
+func is_interacting():
+	return _is_interacting
+
+func is_cancelling():
+	return _is_cancelling
+
 func get_zoom_scale():
 	return _zoom_scale
 
 func set_zoom_scale(zoom_scale):
 	_zoom_scale = zoom_scale
-	
