@@ -23,4 +23,4 @@ MIT
 
 ***Code modification is made by me and some code snippets are being taken for modification such as the controller implementation from [Rayuse](https://github.com/Rayuse)'s [3rd-person-controller-full-gamepad-support](https://github.com/Rayuse/3rd-person-controller-full-gamepad-support).***
 
-***Interaction system is based from [GameDev Compass](https://www.youtube.com/@GameDevCompass)'s work which is [Triggers and Interactable Objects](https://www.youtube.com/watch?v=gK0UKfLHw_4&t=369s) and complies with the MIT license***
+***Interaction system is based from [GameDev Compass](https://www.youtube.com/@GameDevCompass)'s work which is [Triggers and Interactable Objects](https://github.com/Reun-Media/gamedev-compass/tree/master/TriggersInteraction) and complies with the MIT license***
