@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Textures/Orange/texture_02.png" type="Texture" id=1]
 [ext_resource path="res://Textures/Green/texture_02.png" type="Texture" id=2]
 [ext_resource path="res://Textures/Dark/texture_01.png" type="Texture" id=3]
-[ext_resource path="res://Textures/Light/texture_01.png" type="Texture" id=4]
+[ext_resource path="res://Textures/Purple/texture_06.png" type="Texture" id=4]
+[ext_resource path="res://Textures/Red/texture_08.png" type="Texture" id=5]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 3 )
@@ -25,12 +26,15 @@ uv1_triplanar = true
 albedo_texture = ExtResource( 3 )
 uv1_triplanar = true
 
+[sub_resource type="SpatialMaterial" id=6]
+albedo_texture = ExtResource( 5 )
+
 [node name="CSGCombiner" type="CSGCombiner"]
 use_collision = true
 
 [node name="Ground" type="CSGBox" parent="."]
-width = 40.0
-depth = 40.0
+width = 100.0
+depth = 100.0
 material = SubResource( 1 )
 
 [node name="Gap" type="CSGBox" parent="."]
@@ -47,9 +51,9 @@ depth = 3.0
 material = SubResource( 3 )
 
 [node name="Platform" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2, -4.665 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2, -5.0098 )
 width = 3.0
-depth = 3.32624
+depth = 4.0
 material = SubResource( 4 )
 
 [node name="Wall" type="CSGBox" parent="."]
@@ -57,3 +61,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 6, 0 )
 height = 10.0
 depth = 40.0
 material = SubResource( 5 )
+
+[node name="Floating Platform" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 3, -10 )
+width = 3.0
+depth = 4.0
+material = SubResource( 6 )
