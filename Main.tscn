@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GameObjects/AreaTrigger.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Interactable.tscn" type="PackedScene" id=3]
-[ext_resource path="res://PlayerInteractArea.tscn" type="PackedScene" id=4]
+[ext_resource path="res://GameObjects/PlayerInteractArea.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ProceduralSky" id=1]
 
@@ -17,6 +17,11 @@ size = Vector2( 200, 200 )
 [sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0, 0.490196, 0.0196078, 1 )
 
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.882353, 0.0313726, 0.0313726, 1 )
+metallic = 0.5
+roughness = 0.09
+
 [node name="Main" type="Spatial"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -24,9 +29,11 @@ environment = SubResource( 2 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.819272, 0, -0.573405, 0, 1, 0, 0.573405, 0, 0.819272, 0, 2.70409, 0 )
+layers = 3
 shadow_enabled = true
 
 [node name="CSGCombiner" type="CSGCombiner" parent="."]
+layers = 4
 use_collision = true
 collision_mask = 2
 
@@ -51,6 +58,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 4, -7 )
 width = 6.0
 height = 4.0
 depth = 6.0
+material = SubResource( 5 )
 
 [node name="CSGPolygon" type="CSGPolygon" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 16 )
@@ -60,7 +68,7 @@ depth = 4.0
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.24706, 0, 4.67049 )
 
-[node name="AreaTrigger" parent="." instance=ExtResource( 2 )]
+[node name="AreaTrigger" parent="." groups=["interactables"] instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -12.6 )
 node_path = NodePath("Interactable")
 enter_method = "play_sound_when_enter"
@@ -68,7 +76,7 @@ exit_method = "play_sound_when_out"
 
 [node name="Interactable" parent="AreaTrigger" instance=ExtResource( 3 )]
 
-[node name="AreaTrigger2" parent="." instance=ExtResource( 2 )]
+[node name="AreaTrigger2" parent="." groups=["interactables"] instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -12.6 )
 node_path = NodePath("Interactable")
 enter_method = "play_animation_when_enter"
@@ -76,12 +84,26 @@ exit_method = "reset_animation_when_out"
 
 [node name="Interactable" parent="AreaTrigger2" instance=ExtResource( 3 )]
 
-[node name="PlayerInteractArea" parent="." instance=ExtResource( 4 )]
+[node name="PlayerInteractArea" parent="." groups=["interactables"] instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2, -12.6 )
 node_path = NodePath("Interactable")
 call_method = "play_animation_when_enter"
+exit_method = "reset_animation_when_out"
 
 [node name="Interactable" parent="PlayerInteractArea" instance=ExtResource( 3 )]
+
+[node name="PlayerInteractArea2" parent="." groups=["interactables"] instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 2, -12.6 )
+node_path = NodePath("Interactable")
+call_method = "play_animation_when_enter"
+exit_method = "reset_animation_when_out"
+
+[node name="AreaTrigger" parent="PlayerInteractArea2" instance=ExtResource( 2 )]
+node_path = NodePath("../Interactable")
+enter_method = "play_sound_when_enter"
+exit_method = "play_sound_when_out"
+
+[node name="Interactable" parent="PlayerInteractArea2" instance=ExtResource( 3 )]
 
 [connection signal="body_entered" from="AreaTrigger" to="AreaTrigger" method="_on_AreaTrigger_body_entered"]
 [connection signal="body_exited" from="AreaTrigger" to="AreaTrigger" method="_on_AreaTrigger_body_exited"]
@@ -89,3 +111,7 @@ call_method = "play_animation_when_enter"
 [connection signal="body_exited" from="AreaTrigger2" to="AreaTrigger2" method="_on_AreaTrigger_body_exited"]
 [connection signal="body_entered" from="PlayerInteractArea" to="PlayerInteractArea" method="_on_PlayerInteractArea_body_entered"]
 [connection signal="body_exited" from="PlayerInteractArea" to="PlayerInteractArea" method="_on_PlayerInteractArea_body_exited"]
+[connection signal="body_entered" from="PlayerInteractArea2" to="PlayerInteractArea2" method="_on_PlayerInteractArea_body_entered"]
+[connection signal="body_exited" from="PlayerInteractArea2" to="PlayerInteractArea2" method="_on_PlayerInteractArea_body_exited"]
+[connection signal="body_entered" from="PlayerInteractArea2/AreaTrigger" to="PlayerInteractArea2/AreaTrigger" method="_on_AreaTrigger_body_entered"]
+[connection signal="body_exited" from="PlayerInteractArea2/AreaTrigger" to="PlayerInteractArea2/AreaTrigger" method="_on_AreaTrigger_body_exited"]

@@ -6,5 +6,4 @@ onready var prompt = $Prompt
 	#add_exception(owner)
 
 func _physics_process(_delta):
-	if self.is_colliding():
-		prompt.text("Detected")
+	pass

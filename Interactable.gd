@@ -14,4 +14,8 @@ func play_animation_when_enter():
 	interactanim.play("Rotate")
 
 func reset_animation_when_out():
-	interactanim.play_backwards("Rotate") 
+	interactanim.play_backwards("Rotate")
+
+func rotate_me():
+	# manipulate the interactable object
+	pass

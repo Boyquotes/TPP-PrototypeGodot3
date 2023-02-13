@@ -6,9 +6,12 @@ var _dash_cooldown_remaining: float = 0
 
 var closest_interactable
 
+func _ready() -> void:
+	pass
+
 func process(delta):
 	_dash_cooldown_remaining = max(_dash_cooldown_remaining - delta, 0)
-
+	
 	# if the jump button is pressed, transition into the InAir/Jumping state immediately
 	if player.controls.is_jumping():
 		state_machine.transition_to("InAir/Jumping")
@@ -26,11 +29,24 @@ func process(delta):
 	elif !player.has_movement():
 		# if the player has no horizontal movement, transition to the OnGround/Running state
 		state_machine.transition_to("OnGround/Stopped")
-	
+		
+	# find the closest interactable
 	closest_interactable = find_closest_interactable()
-	if player.controls.is_interacting() and closest_interactable != null:
+	# if interacting and there are no other nearby objects
+	if player.interacting() and closest_interactable != null and !player.has_movement() and player.clipcam.is_current():
+		# interact
+		player.clipcam.clear_current(true)
 		closest_interactable.interact()
-
+		player.controls._is_capturing = !player.controls._is_capturing
+		state_machine.transition_to("OnGround/Interacting")
+	# if cancelling and no objects nearby
+	if player.cancelinteract() and closest_interactable != null:
+		# cancel and leave
+		closest_interactable.cancel_interact()
+		state_machine.transition_to("OnGround")
+		if player.defcam.is_current():
+			player.defcam.clear_current(true)
+		player.controls._is_capturing = true
 
 func find_closest_interactable():
 	if player.interactables.size() < 1:

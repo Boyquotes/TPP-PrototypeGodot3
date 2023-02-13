@@ -16,6 +16,8 @@ var _rot_h: float = 0
 var _rot_v: float = 0
 var _distance: float = 0
 
+var current = false
+
 func _ready():
 	# wait until the parent node is ready
 	yield(get_parent(), "ready")
@@ -25,6 +27,8 @@ func _ready():
 
 	# schedule a call for the _initialize_zoom_scale method on the next idle frame
 	call_deferred("_initialize_zoom_scale")
+	
+	_camera.set_current(true)
 
 func _initialize_zoom_scale():
 	# calculate the initial zoom scale based on the camera's current distance and the distance range

@@ -6,7 +6,7 @@ export(float) var min_pitch: float = -90
 export(float) var max_pitch: float = 75
 export(float) var zoom_step: float = .05
 export(float) var sensitivity: float = 0.1
-export(float) var controller_sensitivity: float = 0.1
+export(float) var controller_sensitivity: float = 0.6
 
 #onready var _mobile_controls = $MobileControls
 
@@ -51,6 +51,7 @@ func _process(delta):
 	_is_crouching = Input.is_action_pressed("crouch")
 	_is_interacting = Input.is_action_pressed("go_interact")
 	_is_cancelling = Input.is_action_pressed("cancel_interact")
+	
 	apply_controller_rotation()
 
 func _input(event):
@@ -82,6 +83,11 @@ func _input(event):
 			_zoom_scale = clamp(_zoom_scale - zoom_step, 0, 1)
 		if Input.is_action_just_pressed("zoom_out"):
 			_zoom_scale = clamp(_zoom_scale + zoom_step, 0, 1)
+	
+	# if is interacting and is escaping at the same time
+	if Input.is_action_just_pressed("ui_cancel") and _is_interacting:
+		# keep the pointer captured - might be removed or CHANGED later
+		_is_capturing = true
 
 #apply controller camera rotation
 func apply_controller_rotation():

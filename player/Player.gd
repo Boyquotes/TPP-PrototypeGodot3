@@ -5,7 +5,10 @@ class_name Player
 export(float) var max_slope_angle: float = 50
 
 onready var skin: Spatial = $Skin
-onready var camera: ControllableCamera = $CamRoot/ControllableCamera
+onready var camera: ControllableCamera = $CamRoot/ControllableCamera/
+onready var clipcam: ClippedCamera = $CamRoot/ControllableCamera/GimbalH/GimbalV/ClippedCamera
+onready var inspectcam: InspectCamera = $CamRoot/InspectCamera
+onready var defcam: Camera = $CamRoot/InspectCamera/Camera
 onready var controls: Controls = $Controls
 
 var velocity: Vector3 = Vector3.ZERO
@@ -13,6 +16,8 @@ var y_velocity: float = 0
 
 var _real_velocity: Vector3 = Vector3.ZERO
 var interactables: Array
+
+var current = false
 
 func _physics_process(delta):
 	# the real velocity is a combination of the horizontal and vertical velocities as determined by
@@ -24,3 +29,9 @@ func has_movement():
 	# the player is fully stopped only if both the movement vector and the velocity
 	# vectors are approximately zero. otherwise it means they have movement
 	return controls.get_movement_vector() != Vector2.ZERO || !velocity.is_equal_approx(Vector3.ZERO)
+
+func interacting():
+	return controls.is_interacting()
+
+func cancelinteract():
+	return controls.is_cancelling()

@@ -1,0 +1,6 @@
+extends PlayerState
+
+# MAYBE DO SOMETHING FOR THIS E.G. MOVE ALL INTERACT RELATED OBJECTS HERE FOR OPTIMIZATION
+
+func _process(delta):
+	pass
