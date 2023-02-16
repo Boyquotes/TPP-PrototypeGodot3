@@ -15,8 +15,8 @@ func _process(delta):
 	
 	if (rotating):
 		next_mouse_position = get_viewport().get_mouse_position()
-		rotate_y((next_mouse_position.x - prev_mouse_position.x) * .1 * delta)
-		rotate_y(-(next_mouse_position.y - prev_mouse_position.y) * .1 * delta)
+		rotate_y((next_mouse_position.x - prev_mouse_position.x) * .25 * delta)
+		rotate_x((next_mouse_position.y - prev_mouse_position.y) * .25 * delta)
 		prev_mouse_position = next_mouse_position
 
 func inspect_object():
