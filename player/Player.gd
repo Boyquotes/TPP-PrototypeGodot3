@@ -8,7 +8,7 @@ onready var skin: Spatial = $Skin
 onready var camera: ControllableCamera = $CamRoot/ControllableCamera/
 onready var clipcam: ClippedCamera = $CamRoot/ControllableCamera/GimbalH/GimbalV/ClippedCamera
 onready var inspectcam: InspectCamera = $CamRoot/InspectCamera
-onready var defcam: Camera = $CamRoot/InspectCamera/Camera
+onready var defcam: Camera = $CamRoot/InspectCamera/GimbalH/GimbalV/Camera
 onready var controls: Controls = $Controls
 
 var velocity: Vector3 = Vector3.ZERO
@@ -35,3 +35,6 @@ func interacting():
 
 func cancelinteract():
 	return controls.is_cancelling()
+
+func interactables(var i):
+	interactables = i

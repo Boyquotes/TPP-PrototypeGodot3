@@ -32,13 +32,14 @@ func process(delta):
 		
 	# find the closest interactable
 	closest_interactable = find_closest_interactable()
+	
 	# if interacting and there are no other nearby objects
-	if player.interacting() and closest_interactable != null and !player.has_movement() and player.clipcam.is_current():
+	if player.interacting() and closest_interactable != null and !player.has_movement():
 		# interact
-		player.clipcam.clear_current(true)
+		# player.clipcam.clear_current(true)
 		closest_interactable.interact()
-		player.controls._is_capturing = !player.controls._is_capturing
-		state_machine.transition_to("OnGround/Interacting")
+		# player.controls._is_capturing = !player.controls._is_capturing
+		state_machine.transition_to("OnGround/Stopped/Interacting")
 	# if cancelling and no objects nearby
 	if player.cancelinteract() and closest_interactable != null:
 		# cancel and leave

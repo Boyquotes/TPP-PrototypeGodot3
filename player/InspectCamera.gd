@@ -2,10 +2,6 @@ extends Spatial
 
 class_name InspectCamera
 
-var current = true
+onready var interactables = get_node("../../Interactables")
+var targeting = false
 
-func process(delta):
-	pass
-	#if camera.current:
-	#	inspectcam.current = true
-	#	camera.current = false

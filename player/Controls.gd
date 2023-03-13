@@ -63,9 +63,12 @@ func _input(event):
 	if Input.is_action_just_pressed("ui_accept"):
 		_is_capturing = true
 	
+	# if captured
 	if _is_capturing:
+		# set to invisible
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	else:
+		# set to visible if not captured
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 	# if the mouse cursor is being captured, update the camera rotation using the relative movement

@@ -69,68 +69,70 @@ depth = 4.0
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.24706, 0, 4.67049 )
 
-[node name="AreaTrigger" parent="." groups=["interactables"] instance=ExtResource( 2 )]
+[node name="Interactables" type="Spatial" parent="."]
+
+[node name="AreaTrigger" parent="Interactables" groups=["interactables"] instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -12.6 )
 node_path = NodePath("Interactable")
 enter_method = "play_sound_when_enter"
 exit_method = "play_sound_when_out"
 
-[node name="Interactable" parent="AreaTrigger" instance=ExtResource( 3 )]
+[node name="Interactable" parent="Interactables/AreaTrigger" instance=ExtResource( 3 )]
 
-[node name="AreaTrigger2" parent="." groups=["interactables"] instance=ExtResource( 2 )]
+[node name="AreaTrigger2" parent="Interactables" groups=["interactables"] instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -12.6 )
 node_path = NodePath("Interactable")
 enter_method = "play_animation_when_enter"
 exit_method = "reset_animation_when_out"
 
-[node name="Interactable" parent="AreaTrigger2" instance=ExtResource( 3 )]
+[node name="Interactable" parent="Interactables/AreaTrigger2" instance=ExtResource( 3 )]
 
-[node name="PlayerInteractArea" parent="." groups=["interactables"] instance=ExtResource( 4 )]
+[node name="PlayerInteractArea" parent="Interactables" groups=["interactables"] instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2, -12.6 )
 node_path = NodePath("Interactable")
 call_method = "play_animation_when_enter"
 exit_method = "reset_animation_when_out"
 
-[node name="Interactable" parent="PlayerInteractArea" instance=ExtResource( 3 )]
+[node name="Interactable" parent="Interactables/PlayerInteractArea" instance=ExtResource( 3 )]
 
-[node name="Interactable" parent="." instance=ExtResource( 3 )]
+[node name="Interactable" parent="Interactables" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 2, -12.6 )
 
-[node name="PlayerInteractArea2" parent="Interactable" groups=["interactables"] instance=ExtResource( 4 )]
+[node name="PlayerInteractArea2" parent="Interactables/Interactable" groups=["interactables"] instance=ExtResource( 4 )]
 node_path = NodePath("..")
 call_method = "play_animation_when_enter"
 exit_method = "reset_animation_when_out"
 
-[node name="AreaTrigger3" parent="Interactable" instance=ExtResource( 2 )]
+[node name="AreaTrigger3" parent="Interactables/Interactable" instance=ExtResource( 2 )]
 node_path = NodePath("..")
 enter_method = "play_sound_when_enter"
 exit_method = "play_sound_when_out"
 
-[node name="Inspectable" parent="." instance=ExtResource( 5 )]
+[node name="Inspectable" parent="Interactables" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 2, -12.6 )
 mode = 1
 
-[node name="PlayerInteractArea3" parent="Inspectable" groups=["interactables"] instance=ExtResource( 4 )]
+[node name="PlayerInteractArea3" parent="Interactables/Inspectable" groups=["interactables"] instance=ExtResource( 4 )]
 node_path = NodePath("..")
 call_method = "inspect_object"
 exit_method = "reset_object"
 
-[node name="AreaTrigger" parent="Inspectable" instance=ExtResource( 2 )]
+[node name="AreaTrigger" parent="Interactables/Inspectable" instance=ExtResource( 2 )]
 node_path = NodePath("..")
 enter_method = "play_sound_when_enter"
 exit_method = "play_sound_when_out"
 
-[connection signal="body_entered" from="AreaTrigger" to="AreaTrigger" method="_on_AreaTrigger_body_entered"]
-[connection signal="body_exited" from="AreaTrigger" to="AreaTrigger" method="_on_AreaTrigger_body_exited"]
-[connection signal="body_entered" from="AreaTrigger2" to="AreaTrigger2" method="_on_AreaTrigger_body_entered"]
-[connection signal="body_exited" from="AreaTrigger2" to="AreaTrigger2" method="_on_AreaTrigger_body_exited"]
-[connection signal="body_entered" from="PlayerInteractArea" to="PlayerInteractArea" method="_on_PlayerInteractArea_body_entered"]
-[connection signal="body_exited" from="PlayerInteractArea" to="PlayerInteractArea" method="_on_PlayerInteractArea_body_exited"]
-[connection signal="body_entered" from="Interactable/PlayerInteractArea2" to="Interactable/PlayerInteractArea2" method="_on_PlayerInteractArea_body_entered"]
-[connection signal="body_exited" from="Interactable/PlayerInteractArea2" to="Interactable/PlayerInteractArea2" method="_on_PlayerInteractArea_body_exited"]
-[connection signal="body_entered" from="Interactable/AreaTrigger3" to="Interactable/AreaTrigger3" method="_on_AreaTrigger_body_entered"]
-[connection signal="body_exited" from="Interactable/AreaTrigger3" to="Interactable/AreaTrigger3" method="_on_AreaTrigger_body_exited"]
-[connection signal="body_entered" from="Inspectable/PlayerInteractArea3" to="Inspectable/PlayerInteractArea3" method="_on_PlayerInteractArea_body_entered"]
-[connection signal="body_exited" from="Inspectable/PlayerInteractArea3" to="Inspectable/PlayerInteractArea3" method="_on_PlayerInteractArea_body_exited"]
-[connection signal="body_entered" from="Inspectable/AreaTrigger" to="Inspectable/AreaTrigger" method="_on_AreaTrigger_body_entered"]
-[connection signal="body_exited" from="Inspectable/AreaTrigger" to="Inspectable/AreaTrigger" method="_on_AreaTrigger_body_exited"]
+[connection signal="body_entered" from="Interactables/AreaTrigger" to="Interactables/AreaTrigger" method="_on_AreaTrigger_body_entered"]
+[connection signal="body_exited" from="Interactables/AreaTrigger" to="Interactables/AreaTrigger" method="_on_AreaTrigger_body_exited"]
+[connection signal="body_entered" from="Interactables/AreaTrigger2" to="Interactables/AreaTrigger2" method="_on_AreaTrigger_body_entered"]
+[connection signal="body_exited" from="Interactables/AreaTrigger2" to="Interactables/AreaTrigger2" method="_on_AreaTrigger_body_exited"]
+[connection signal="body_entered" from="Interactables/PlayerInteractArea" to="Interactables/PlayerInteractArea" method="_on_PlayerInteractArea_body_entered"]
+[connection signal="body_exited" from="Interactables/PlayerInteractArea" to="Interactables/PlayerInteractArea" method="_on_PlayerInteractArea_body_exited"]
+[connection signal="body_entered" from="Interactables/Interactable/PlayerInteractArea2" to="Interactables/Interactable/PlayerInteractArea2" method="_on_PlayerInteractArea_body_entered"]
+[connection signal="body_exited" from="Interactables/Interactable/PlayerInteractArea2" to="Interactables/Interactable/PlayerInteractArea2" method="_on_PlayerInteractArea_body_exited"]
+[connection signal="body_entered" from="Interactables/Interactable/AreaTrigger3" to="Interactables/Interactable/AreaTrigger3" method="_on_AreaTrigger_body_entered"]
+[connection signal="body_exited" from="Interactables/Interactable/AreaTrigger3" to="Interactables/Interactable/AreaTrigger3" method="_on_AreaTrigger_body_exited"]
+[connection signal="body_entered" from="Interactables/Inspectable/PlayerInteractArea3" to="Interactables/Inspectable/PlayerInteractArea3" method="_on_PlayerInteractArea_body_entered"]
+[connection signal="body_exited" from="Interactables/Inspectable/PlayerInteractArea3" to="Interactables/Inspectable/PlayerInteractArea3" method="_on_PlayerInteractArea_body_exited"]
+[connection signal="body_entered" from="Interactables/Inspectable/AreaTrigger" to="Interactables/Inspectable/AreaTrigger" method="_on_AreaTrigger_body_entered"]
+[connection signal="body_exited" from="Interactables/Inspectable/AreaTrigger" to="Interactables/Inspectable/AreaTrigger" method="_on_AreaTrigger_body_exited"]

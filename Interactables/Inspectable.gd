@@ -8,7 +8,7 @@ var rotating = false
 var prev_mouse_position
 var next_mouse_position
 
-onready var state_machine = get_node("../Player/Movement")
+onready var state_machine = get_node("../../Player/Movement")
 
 func _process(delta):
 	inspect_object()
