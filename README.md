@@ -1,5 +1,7 @@
 # Third Person Controller Prototype
 
+## This is "deprecated", using this as a private template (maybe an archive too).
+
 ## Features and Upcoming ones
 Features include:
 - Basic movement e.g. walking 
